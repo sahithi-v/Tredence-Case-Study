@@ -27,18 +27,17 @@ The classification loss is standard cross-entropy loss on CIFAR-10.
 The sparsity loss is based on the gate values across all prunable layers.
 
 Why L1 on Sigmoid Gates Encourages Sparsity
-An L1 penalty increases linearly with the value of each gate, so every active gate adds a direct cost to the loss. [file:1]  
+An L1 penalty increases linearly with the value of each gate, so every active gate adds a direct cost to the loss. 
 Because the gates are produced by a sigmoid, they remain between 0 and 1, and minimizing their L1-based penalty encourages many of them to become very small. [file:1]  
-When a gate becomes close to 0, the corresponding weight contribution is effectively removed, which makes the network sparse. [file:1]
+When a gate becomes close to 0, the corresponding weight contribution is effectively removed, which makes the network sparse. 
 
 Experimental Setup
-- Dataset: CIFAR-10 from `torchvision.datasets` [file:1]
-- Model: Multi-layer perceptron built using custom `PrunableLinear` layers [file:1]
+- Dataset: CIFAR-10 from `torchvision.datasets` 
+- Model: Multi-layer perceptron built using custom `PrunableLinear` layers
 - Optimizer: AdamW
-- Metric 1: Test Accuracy [file:1]
-- Metric 2: Sparsity Level (%), measured as the percentage of gate values below `1e-2` [file:1]
-- Compared λ values: `0.0`, `1e-5`, `5e-5`, `1e-4` [file:1]
-
+- Metric 1: Test Accuracy 
+- Metric 2: Sparsity Level (%), measured as the percentage of gate values below `1e-2` 
+- Compared λ values: `0.0`, `1e-5`, `5e-5`, `1e-4` 
 Results
 
 | Lambda | Test Accuracy | Sparsity Level (%) |
@@ -49,6 +48,5 @@ Results
 | 1e-4   | 59.66         | 58.71              |
 
 ## Analysis
-The results show the expected sparsity-versus-accuracy trade-off required by the case study. [file:1]  
-With `λ = 0`, the model focuses only on classification and produces almost no pruning, while larger values of `λ` increase sparsity by penalizing active gates more strongly. [file:1]  
-As 
+The results show the expected sparsity-versus-accuracy trade-off required by the case study. 
+With `λ = 0`, the model focuses only on classification and produces almost no pruning, while larger values of `λ` increase sparsity by penalizing active gates more strongly.
